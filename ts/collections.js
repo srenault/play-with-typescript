@@ -1,48 +1,22 @@
-var __extends = this.__extends || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    __.prototype = b.prototype;
-    d.prototype = new __();
-};
 define(["require", "exports"], function(require, exports) {
     (function (collections) {
         (function (immutable) {
-            var List = (function () {
-                function List() {
-                    var as = [];
-                    for (var _i = 0; _i < (arguments.length - 0); _i++) {
-                        as[_i] = arguments[_i + 0];
-                    }
-                    if (as.length == 0) {
-                        return immutable.nil;
-                    } else {
-                        var tail = as.splice(1, as.length);
-                        return new Cons(as[0], List.apply(null, tail));
-                    }
+            function List() {
+                var as = [];
+                for (var _i = 0; _i < (arguments.length - 0); _i++) {
+                    as[_i] = arguments[_i + 0];
                 }
-                List.prototype.head = function () {
-                    throw new Error("abstract method");
-                };
-
-                List.prototype.tail = function () {
-                    throw new Error("abstract method");
-                };
-
-                List.prototype.isEmpty = function () {
-                    throw new Error("abstract method");
-                };
-
-                List.prototype.length = function () {
-                    throw new Error("abstract method");
-                };
-                return List;
-            })();
+                if (as.length == 0) {
+                    return new Nil();
+                } else {
+                    var tail = as.splice(1, as.length);
+                    return new Cons(as[0], List.apply(null, tail));
+                }
+            }
             immutable.List = List;
 
-            var Nil = (function (_super) {
-                __extends(Nil, _super);
+            var Nil = (function () {
                 function Nil() {
-                    _super.call(this);
                 }
                 Nil.prototype.head = function () {
                     throw new Error("head of empty list");
@@ -60,15 +34,11 @@ define(["require", "exports"], function(require, exports) {
                     return 0;
                 };
                 return Nil;
-            })(List);
+            })();
             immutable.Nil = Nil;
 
-            immutable.nil = new Nil();
-
-            var Cons = (function (_super) {
-                __extends(Cons, _super);
+            var Cons = (function () {
                 function Cons(hd, tl) {
-                    _super.call(this);
                     this.hd = hd;
                     this.tl = tl;
                 }
@@ -88,7 +58,7 @@ define(["require", "exports"], function(require, exports) {
                     return 1 + this.tl.length();
                 };
                 return Cons;
-            })(List);
+            })();
         })(collections.immutable || (collections.immutable = {}));
         var immutable = collections.immutable;
     })(exports.collections || (exports.collections = {}));

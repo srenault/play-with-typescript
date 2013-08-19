@@ -3,13 +3,17 @@ define(["require", "exports", "models/Bar", "models/Foo", "ts/collections"], fun
     var nsfoo = __nsfoo__;
     var nscollections = __nscollections__;
 
+    var Bar = nsbar.Bar;
+    var Foo = nsfoo.Foo;
+    var List = nscollections.collections.immutable.List;
+
     require(['jquery'], function ($) {
         $(document).ready(function () {
-            var bar = new nsbar.Bar();
-            var barList = new nscollections.collections.immutable.List(bar, bar, bar, bar);
+            var bar = new Bar();
+            var barList = List(bar, bar, bar, bar);
 
-            var foo = new nsfoo.Foo();
-            var fooList = new nscollections.collections.immutable.List(foo, foo, foo, foo);
+            var foo = new Foo();
+            var fooList = List(foo, foo, foo, foo);
 
             console.log(barList, fooList);
         });

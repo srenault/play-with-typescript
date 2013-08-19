@@ -4,13 +4,17 @@ import nsbar = require("models/Bar");
 import nsfoo = require("models/Foo");
 import nscollections = require("ts/collections")
 
+var Bar = nsbar.Bar;
+var Foo = nsfoo.Foo;
+var List = nscollections.collections.immutable.List;
+
 require(['jquery'], ($) => {
     $(document).ready(() => {
-        var bar = new nsbar.Bar()
-        var barList = new nscollections.collections.immutable.List<nsbar.Bar>(bar, bar, bar, bar);
+        var bar = new Bar()
+        var barList = List<nsbar.Bar>(bar, bar, bar, bar);
 
-        var foo = new nsfoo.Foo();
-        var fooList = new nscollections.collections.immutable.List<nsfoo.Foo>(foo, foo, foo, foo);
+        var foo = new Foo();
+        var fooList = List<nsfoo.Foo>(foo, foo, foo, foo);
 
         console.log(barList, fooList);
     });
