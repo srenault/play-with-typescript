@@ -6,5 +6,3 @@ export class Bar {
     constructor () {
     }
 }
-
-console.log(foo)

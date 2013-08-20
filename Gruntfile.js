@@ -7,17 +7,21 @@ module.exports = function(grunt) {
                 livereload: true
             },
             scripts: {
-                files: ['main.ts'],
+                files: ['assets/typescripts/**/*.ts'],
                 tasks: ['typescript'],
-                options: {}
+                options: {
+                }
             }
         },
         typescript: {
             base: {
-                src: ['main.ts'],
-                dest: 'main.js',
+                src: ['assets/typescripts/**/*.ts'],
+                dest: 'assets/javascripts/',
                 options: {
-                    module: 'AMD'
+                    module: 'amd',
+                    base_path: 'assets/typescripts/',
+                    nolib: true,
+                    target: 'es5'
                 }
             }
         },
@@ -32,7 +36,7 @@ module.exports = function(grunt) {
                     import: []
                 },
                 files: {
-                    'assets/stylesheets/main.css': ['assets/stylesheets/*.styl']
+                    'assets/stylesheets/main.css': ['assets/stylus/*.styl']
                 }
             }
         }

@@ -1,5 +1,0 @@
-#!/bin/bash
-
-echo "COMPILING"
-/Users/sre/data/Projects/forks/typescript/bin/tsc main.ts
-echo "OK"

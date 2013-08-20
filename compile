@@ -1,3 +1,0 @@
-#!/bin/bash
-
-fswatch . "/Users/sre/data/Projects/forks/typescript/bin/tsc *.ts"
