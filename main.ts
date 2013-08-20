@@ -29,5 +29,4 @@ require(['jquery'], ($) => {
 
         console.log(app, app1, new Any(), List<Any>());
     });
-
 });

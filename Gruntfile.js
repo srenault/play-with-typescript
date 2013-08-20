@@ -2,28 +2,46 @@ module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         watch: {
-           options: {
+            options: {
                 forever: true,
                 livereload: true
             },
             scripts: {
-                files: ['**/*.ts'],
+                files: ['main.ts'],
                 tasks: ['typescript'],
                 options: {}
             }
         },
         typescript: {
             base: {
-                src: ['**/*.ts'],
+                src: ['main.ts'],
                 dest: 'main.js',
-                options: {}
+                options: {
+                    module: 'AMD'
+                }
+            }
+        },
+        stylus: {
+            compile: {
+                options: {
+                    paths: ['assets/stylesheets'],
+                    urlfunc: 'embedurl',
+                    use: [
+                        require('fluidity')
+                    ],
+                    import: []
+                },
+                files: {
+                    'assets/stylesheets/main.css': ['assets/stylesheets/*.styl']
+                }
             }
         }
     });
 
-    grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-typescript');
+    grunt.loadNpmTasks('grunt-contrib-stylus');
+    grunt.loadNpmTasks('grunt-contrib-watch');
 
     // Here we  go !
-    grunt.registerTask('default', ['typescript', 'watch']);
+    grunt.registerTask('default', ['typescript', 'stylus', 'watch']);
 };
