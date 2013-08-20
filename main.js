@@ -1,10 +1,13 @@
-define(["require", "exports", "models/Bar", "models/Foo", "ts/collections"], function(require, exports, __nsbar__, __nsfoo__, __nscollections__) {
-    var nsbar = __nsbar__;
-    var nsfoo = __nsfoo__;
+define(["require", "exports", "models/*", "ts/collections", "app", "models/Any"], function(require, exports, __models__, __nscollections__, __nsapp__, __Any__) {
+    
+    
+    var models = __models__;
     var nscollections = __nscollections__;
+    var nsapp = __nsapp__;
+    var Any = __Any__;
 
-    var Bar = nsbar.Bar;
-    var Foo = nsfoo.Foo;
+    var Bar = models.Bar;
+    var Foo = models.Foo;
     var List = nscollections.collections.immutable.List;
 
     require(['jquery'], function ($) {
@@ -16,6 +19,11 @@ define(["require", "exports", "models/Bar", "models/Foo", "ts/collections"], fun
             var fooList = List(foo, foo, foo, foo);
 
             console.log(barList, fooList);
+
+            var app = new nsapp.App(Router);
+            var app1 = nsapp.init(Router);
+
+            console.log(app, app1, new Any());
         });
     });
 });
