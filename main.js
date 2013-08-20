@@ -23,7 +23,7 @@ define(["require", "exports", "models/*", "ts/collections", "app", "models/Any"]
             var app = new nsapp.App(Router);
             var app1 = nsapp.init(Router);
 
-            console.log(app, app1, new Any());
+            console.log(app, app1, List());
         });
     });
 });

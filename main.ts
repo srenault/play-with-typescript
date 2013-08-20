@@ -27,7 +27,7 @@ require(['jquery'], ($) => {
         var app = new nsapp.App(Router);
         var app1 = nsapp.init(Router);
 
-        console.log(app, app1, new Any());
+        console.log(app, app1, new Any(), List<Any>());
     });
 
 });
