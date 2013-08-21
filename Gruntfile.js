@@ -7,7 +7,7 @@ module.exports = function(grunt) {
                 livereload: true
             },
             scripts: {
-                files: ['assets/typescripts/**/*.ts', 'assets/stylus/**/*.styl'],
+                files: ['src/typescripts/**/*.ts', 'src/stylus/**/*.styl'],
                 tasks: ['typescript', 'stylus:dev'],
                 options: {
                 }
@@ -15,11 +15,11 @@ module.exports = function(grunt) {
         },
         typescript: {
             base: {
-                src: ['assets/typescripts/**/*.ts'],
+                src: ['src/typescripts/**/*.ts'],
                 dest: 'assets/javascripts/',
                 options: {
                     module: 'amd',
-                    base_path: 'assets/typescripts/',
+                    base_path: 'src/typescripts/',
                     nolib: true,
                     target: 'es5'
                 }
@@ -28,7 +28,7 @@ module.exports = function(grunt) {
         stylus: {
             dev: {
                 options: {
-                    paths: ['assets/stylus'],
+                    paths: ['src/stylus'],
                     urlfunc: 'embedurl',
                     use: [
                         require('fluidity')
@@ -36,12 +36,12 @@ module.exports = function(grunt) {
                     import: []
                 },
                 files: {
-                    'assets/stylesheets/main.css': ['assets/stylus/**/*.styl']
+                    'assets/stylesheets/main.css': ['src/stylus/**/*.styl']
                 }
             },
             prod: {
                 options: {
-                    paths: ['assets/stylus'],
+                    paths: ['src/stylus'],
                     compress: true,
                     urlfunc: 'embedurl',
                     use: [
@@ -50,7 +50,7 @@ module.exports = function(grunt) {
                     import: []
                 },
                 files: {
-                    'assets/dist/main.css': ['assets/stylus/**/*.styl']
+                    'assets/dist/main.css': ['src/stylus/**/*.styl']
                 }
             }
         },
@@ -76,14 +76,14 @@ module.exports = function(grunt) {
         },
         copy: {
             dev: {
-                cwd: 'assets/vendors/',
+                cwd: 'src/vendors/',
                 src: ['**'],
                 dest: 'assets/javascripts/vendors/',
                 flatten: true,
                 expand: true
             },
             prod: {
-                cwd: 'assets/vendors/',
+                cwd: 'src/vendors/',
                 src: ['**'],
                 dest: 'assets/dist/vendors/',
                 flatten: true,
