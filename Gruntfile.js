@@ -49,7 +49,7 @@ module.exports = function(grunt) {
                     import: []
                 },
                 files: {
-                    'assets/main/dist.css': ['assets/stylus/**/*.styl']
+                    'assets/dist/main.css': ['assets/stylus/**/*.styl']
                 }
             }
         },
