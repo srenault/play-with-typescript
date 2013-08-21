@@ -547,6 +547,7 @@ declare var menubar: any;
 declare var locationbar: any;
 declare var history: any;
 declare var screen: any
+declare var alert: any;
 
 interface Function {
     apply(thisArg: any, argArray?: any): any;

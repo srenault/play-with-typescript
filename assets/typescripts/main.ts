@@ -11,7 +11,7 @@ var Bar = models.Bar;
 var Foo = models.Foo;
 var List = nscollections.collections.immutable.List;
 
-require(['jquery'], ($) => {
+require([], () => {
     $(document).ready(() => {
         var bar = new Bar()
         var barList = List<nsbar.Bar>(bar, bar, bar, bar);

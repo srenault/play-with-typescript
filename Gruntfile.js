@@ -7,7 +7,7 @@ module.exports = function(grunt) {
                 livereload: true
             },
             scripts: {
-                files: ['assets/typescripts/**/*.ts'],
+                files: ['assets/typescripts/**/*.ts', 'assets/stylus/**/*.styl'],
                 tasks: ['typescript'],
                 options: {
                 }
@@ -26,9 +26,9 @@ module.exports = function(grunt) {
             }
         },
         stylus: {
-            compile: {
+            dev: {
                 options: {
-                    paths: ['assets/stylesheets'],
+                    paths: ['assets/stylus'],
                     urlfunc: 'embedurl',
                     use: [
                         require('fluidity')
@@ -36,8 +36,41 @@ module.exports = function(grunt) {
                     import: []
                 },
                 files: {
-                    'assets/stylesheets/main.css': ['assets/stylus/*.styl']
+                    'assets/stylesheets/main.css': ['assets/stylus/**/*.styl']
                 }
+            },
+            prod: {
+                options: {
+                    paths: ['assets/stylus'],
+                    urlfunc: 'embedurl',
+                    use: [
+                        require('fluidity')
+                    ],
+                    import: []
+                },
+                files: {
+                    'assets/dist/main.css': ['assets/stylus/**/*.styl']
+                }
+            }
+        },
+        requirejs: {
+            compile: {
+                options: {
+                    baseUrl: "assets/javascripts",
+                    name: "main",
+                    out: "assets/dist/main.js"
+                }
+            }
+        },
+        compress: {
+            main: {
+                options: {
+                    mode: 'gzip'
+                },
+                expand: true,
+                cwd: 'assets/dist/',
+                src: ['**/*.js'],
+                dest: 'assets/dist/'
             }
         }
     });
@@ -45,7 +78,12 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-typescript');
     grunt.loadNpmTasks('grunt-contrib-stylus');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-requirejs');
+    grunt.loadNpmTasks('grunt-contrib-compress');
 
     // Here we  go !
-    grunt.registerTask('default', ['typescript', 'stylus', 'watch']);
+    grunt.registerTask('default', ['typescript', 'stylus']);
+    grunt.registerTask('dev', ['typescript', 'stylus:dev', 'watch']);
+    grunt.registerTask('prod', ['typescript', 'stylus:prod', 'requirejs', 'compress']);
+    //TODO: CP LIBRARIES IN DIST + GZIP
 };

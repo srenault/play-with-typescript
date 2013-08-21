@@ -10,7 +10,7 @@ define(["require", "exports", "./models/*", "./ts/collections", "./app", "./mode
     var Foo = models.Foo;
     var List = nscollections.collections.immutable.List;
 
-    require(['jquery'], function ($) {
+    require([], function () {
         $(document).ready(function () {
             var bar = new Bar();
             var barList = List(bar, bar, bar, bar);
