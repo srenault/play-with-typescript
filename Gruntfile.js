@@ -49,7 +49,7 @@ module.exports = function(grunt) {
                     import: []
                 },
                 files: {
-                    'assets/dist/main.css': ['assets/stylus/**/*.styl']
+                    'assets/main/dist.css': ['assets/stylus/**/*.styl']
                 }
             }
         },
@@ -69,7 +69,7 @@ module.exports = function(grunt) {
                 },
                 expand: true,
                 cwd: 'assets/dist/',
-                src: ['**/*.js'],
+                src: ['**/*.js','**/*.css'],
                 dest: 'assets/dist/'
             }
         }
@@ -82,7 +82,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-compress');
 
     // Here we  go !
-    grunt.registerTask('default', ['typescript', 'stylus']);
+    grunt.registerTask('default', ['typescript', 'stylus:dev']);
     grunt.registerTask('dev', ['typescript', 'stylus:dev', 'watch']);
     grunt.registerTask('prod', ['typescript', 'stylus:prod', 'requirejs', 'compress']);
     //TODO: CP LIBRARIES IN DIST + GZIP
