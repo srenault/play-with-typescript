@@ -85,5 +85,4 @@ module.exports = function(grunt) {
     grunt.registerTask('default', ['typescript', 'stylus:dev']);
     grunt.registerTask('dev', ['typescript', 'stylus:dev', 'watch']);
     grunt.registerTask('prod', ['typescript', 'stylus:prod', 'requirejs', 'compress']);
-    //TODO: CP LIBRARIES IN DIST + GZIP
 };
