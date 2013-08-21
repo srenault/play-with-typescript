@@ -8,7 +8,7 @@ module.exports = function(grunt) {
             },
             scripts: {
                 files: ['assets/typescripts/**/*.ts', 'assets/stylus/**/*.styl'],
-                tasks: ['typescript'],
+                tasks: ['typescript', 'stylus:dev'],
                 options: {
                 }
             }
@@ -72,6 +72,22 @@ module.exports = function(grunt) {
                 src: ['**/*.js','**/*.css'],
                 dest: 'assets/dist/'
             }
+        },
+        copy: {
+            dev: {
+                cwd: 'assets/vendors/',
+                src: ['**'],
+                dest: 'assets/javascripts/vendors/',
+                flatten: true,
+                expand: true
+            },
+            prod: {
+                cwd: 'assets/vendors/',
+                src: ['**'],
+                dest: 'assets/dist/vendors/',
+                flatten: true,
+                expand: true
+            }
         }
     });
 
@@ -80,9 +96,10 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
     grunt.loadNpmTasks('grunt-contrib-compress');
+    grunt.loadNpmTasks('grunt-contrib-copy');
 
     // Here we  go !
-    grunt.registerTask('default', ['typescript', 'stylus:dev']);
-    grunt.registerTask('dev', ['typescript', 'stylus:dev', 'watch']);
-    grunt.registerTask('prod', ['typescript', 'stylus:prod', 'requirejs', 'compress']);
+    grunt.registerTask('default', ['typescript', 'copy:dev', 'stylus:dev']);
+    grunt.registerTask('dev', ['typescript', 'stylus:dev', 'copy:dev', 'watch']);
+    grunt.registerTask('prod', ['typescript', 'stylus:prod', 'requirejs', 'copy:prod', 'compress']);
 };
