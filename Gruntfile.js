@@ -42,6 +42,7 @@ module.exports = function(grunt) {
             prod: {
                 options: {
                     paths: ['assets/stylus'],
+                    compress: true,
                     urlfunc: 'embedurl',
                     use: [
                         require('fluidity')
