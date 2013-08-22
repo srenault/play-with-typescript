@@ -16,7 +16,7 @@ module.exports = function(grunt) {
         typescript: {
             base: {
                 src: ['front/typescripts/**/*.ts'],
-                dest: 'public/javascripts/',
+                dest: 'public/javascripts/app',
                 options: {
                     module: 'amd',
                     base_path: 'front/typescripts/',
@@ -36,7 +36,7 @@ module.exports = function(grunt) {
                     import: []
                 },
                 files: {
-                    'public/stylesheets/main.css': ['front/stylus/**/*.styl']
+                    'public/stylesheets/app/main.css': ['front/stylus/**/*.styl']
                 }
             },
             prod: {
@@ -57,7 +57,7 @@ module.exports = function(grunt) {
         requirejs: {
             compile: {
                 options: {
-                    baseUrl: "public/javascripts",
+                    baseUrl: "public/javascripts/app",
                     name: "main",
                     out: "public/dist/main.js"
                 }
@@ -75,15 +75,8 @@ module.exports = function(grunt) {
             }
         },
         copy: {
-            dev: {
-                cwd: 'front/javascripts/vendors/',
-                src: ['**'],
-                dest: 'public/javascripts/vendors/',
-                flatten: true,
-                expand: true
-            },
             prod: {
-                cwd: 'front/javascripts/vendors/',
+                cwd: 'public/javascripts/vendors/',
                 src: ['**'],
                 dest: 'public/dist/vendors/',
                 flatten: true,
@@ -91,7 +84,7 @@ module.exports = function(grunt) {
             }
         },
         clean: {
-            dev: ["public/javascripts", "public/stylesheets"],
+            dev: ["public/javascripts/app", "public/stylesheets/app"],
             prod: ["public/dist"]
         }
     });
@@ -105,8 +98,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-clean');
 
     // Here we  go !
-    grunt.registerTask('default', ['typescript', 'clean:dev', 'copy:dev', 'stylus:dev']);
-    grunt.registerTask('dev', ['typescript', 'stylus:dev', 'clean:dev', 'copy:dev', 'watch']);
-    grunt.registerTask('prod', ['typescript', 'stylus:prod', 'requirejs', 'clean:prod', 'copy:prod', 'compress']);
+    grunt.registerTask('default', ['clean:dev', 'typescript', 'stylus:dev']);
+    grunt.registerTask('dev', ['clean:dev', 'typescript', 'stylus:dev', 'watch']);
+    grunt.registerTask('prod', ['clean:prod', 'typescript', 'stylus:prod', 'requirejs', 'copy:prod', 'compress']);
     grunt.registerTask('cleanAll', ['clean:prod', 'clean:dev']);
 };

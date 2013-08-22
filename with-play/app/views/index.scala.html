@@ -1,15 +1,19 @@
-@()
+@()(implicit request: RequestHeader)
 
 <!DOCTYPE html>
 <html>
     <head>
         <title>Sample App</title>
-        <link rel="stylesheet" media="screen" href="@utils.Asset("stylesheets/main.css")">
+        <link rel="stylesheet" media="screen" href="@utils.Asset("stylesheets/app/main.css")">
         <link rel="shortcut icon" type="image/png" href="@utils.staticAsset("images/favicon.png")">
-        <script src="@utils.staticAsset("javascripts/vendors/jquery.js")" type="text/javascript"></script>
-        <script src="@utils.staticAsset("javascripts/vendors/native.history.js")" type="text/javascript"></script>
-        <script src="@utils.staticAsset("javascripts/vendors/Router.js")" type="text/javascript"></script>
-        <script data-main="@utils.Asset("javascripts/main.js")" src="@utils.staticAsset("javascripts/vendors/require.js")"></script>
+        @utils.scriptTag(utils.staticAsset("javascripts/vendors/jquery.js"), utils.staticAsset("dist/vendors/jquery.js"))
+        @utils.scriptTag(utils.staticAsset("javascripts/vendors/native.history.js"), utils.staticAsset("dist/vendors/native.history.js"))
+        @utils.scriptTag(utils.staticAsset("javascripts/vendors/Router.js"), utils.staticAsset("dist/vendors/Router.js"))
+        @if(global.App.isProd) {
+        <script data-main="@utils.Asset("dist/app/main.js")" src="@utils.staticAsset("dist/vendors/require.js")"></script>
+        } else {
+        <script data-main="@utils.Asset("javascripts/app/main.js")" src="@utils.staticAsset("javascripts/vendors/require.js")"></script>
+        }
     </head>
     <body>
     </body>
