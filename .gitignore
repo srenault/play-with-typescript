@@ -6,3 +6,4 @@ with-play/project/target/
 with-play/target/
 with-play/node_modules/
 with-play/public/
+with-play/logs/application.log
