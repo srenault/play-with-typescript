@@ -10,6 +10,7 @@
         "grunt-contrib-requirejs": "~0.4.1",
         "grunt-contrib-compress": "~0.5.2",
         "grunt-contrib-copy": "~0.4.1",
+        "grunt-contrib-clean": "0.5.0",
         "fluidity": "~0.1.5",
         "stylus": "~0.37.0"
     }

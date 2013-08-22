@@ -89,6 +89,10 @@ module.exports = function(grunt) {
                 flatten: true,
                 expand: true
             }
+        },
+        clean: {
+            dev: ["public/javascripts", "public/stylesheets"],
+            prod: ["public/dist"]
         }
     });
 
@@ -98,9 +102,11 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-requirejs');
     grunt.loadNpmTasks('grunt-contrib-compress');
     grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-clean');
 
     // Here we  go !
-    grunt.registerTask('default', ['typescript', 'copy:dev', 'stylus:dev']);
-    grunt.registerTask('dev', ['typescript', 'stylus:dev', 'copy:dev', 'watch']);
-    grunt.registerTask('prod', ['typescript', 'stylus:prod', 'requirejs', 'copy:prod', 'compress']);
+    grunt.registerTask('default', ['typescript', 'clean:dev', 'copy:dev', 'stylus:dev']);
+    grunt.registerTask('dev', ['typescript', 'stylus:dev', 'clean:dev', 'copy:dev', 'watch']);
+    grunt.registerTask('prod', ['typescript', 'stylus:prod', 'requirejs', 'clean:prod', 'copy:prod', 'compress']);
+    grunt.registerTask('cleanAll', ['clean:prod', 'clean:dev']);
 };
