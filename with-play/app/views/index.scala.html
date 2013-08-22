@@ -4,8 +4,8 @@
 <html>
     <head>
         <title>Sample App</title>
-        <link rel="stylesheet" media="screen" href="@utils.Asset("stylesheets/app/main.css")">
         <link rel="shortcut icon" type="image/png" href="@utils.staticAsset("images/favicon.png")">
+        @utils.linkTag(utils.Asset("stylesheets/app/main.css"), utils.Asset("dist/main.css"))
         @utils.scriptTag(utils.staticAsset("javascripts/vendors/jquery.js"), utils.staticAsset("dist/vendors/jquery.js"))
         @utils.scriptTag(utils.staticAsset("javascripts/vendors/native.history.js"), utils.staticAsset("dist/vendors/native.history.js"))
         @utils.scriptTag(utils.staticAsset("javascripts/vendors/Router.js"), utils.staticAsset("dist/vendors/Router.js"))

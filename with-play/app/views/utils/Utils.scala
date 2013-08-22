@@ -15,4 +15,11 @@ object `package` {
     } else {
       Html(s"""<script src="${devUrl.absoluteURL()}" type="text/javascript"></script>""" )
     }
+
+  def linkTag(devUrl: Call, prodUrl: Call)(implicit request: RequestHeader) =
+    if(global.App.isProd) {
+      Html(s"""<link rel="stylesheet" media="screen" href="${prodUrl.absoluteURL()}">""" )
+    } else {
+      Html(s"""<link rel="stylesheet" media="screen" href="${devUrl.absoluteURL()}">""" )
+    }
 }
