@@ -1,4 +1,4 @@
 play-with-typescript
 ====================
 
-Simple example of a structured project using Grunt, typescripts & stylus.
+Simple example of a structured project using Grunt, TypeScript & Stylus.
