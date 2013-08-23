@@ -64,10 +64,12 @@ module.exports = function(grunt) {
             }
         },
         compress: {
-            main: {
+            prod: {
                 options: {
                     mode: 'gzip'
                 },
+                archive: 'app.zip',
+                files: [{src: 'public/dist/**'}],
                 expand: true,
                 cwd: 'public/dist/',
                 src: ['**/*.js','**/*.css'],
@@ -84,8 +86,9 @@ module.exports = function(grunt) {
             }
         },
         clean: {
-            dev: ["public/javascripts/app", "public/stylesheets/app"],
-            prod: ["public/dist"]
+            app: ["public/javascripts/app", "public/stylesheets/app"],
+            compress: ["public/dist/**/*.js"],
+            dist: ["public/dist"]
         }
     });
 
@@ -98,8 +101,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-clean');
 
     // Here we  go !
-    grunt.registerTask('default', ['clean:dev', 'typescript', 'stylus:dev']);
-    grunt.registerTask('dev', ['clean:dev', 'typescript', 'stylus:dev', 'watch']);
-    grunt.registerTask('prod', ['clean:prod', 'typescript', 'stylus:prod', 'requirejs', 'copy:prod', 'compress']);
-    grunt.registerTask('cleanAll', ['clean:prod', 'clean:dev']);
+    grunt.registerTask('default', ['clean:app', 'typescript', 'stylus:dev']);
+    grunt.registerTask('dev', ['clean:app', 'typescript', 'stylus:dev', 'watch']);
+    grunt.registerTask('prod', ['clean:dist', 'typescript', 'stylus:prod', 'requirejs', 'copy:prod', 'compress:prod', 'clean:compress']);
+    grunt.registerTask('cleanAll', ['clean:app', 'clean:dist']);
 };
