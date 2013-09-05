@@ -16,7 +16,7 @@ module.exports = function(grunt) {
         typescript: {
             base: {
                 src: ['src/typescripts/**/*.ts'],
-                dest: 'assets/javascripts/',
+                dest: 'assets/javascripts/app',
                 options: {
                     module: 'amd',
                     base_path: 'src/typescripts/',
@@ -36,7 +36,7 @@ module.exports = function(grunt) {
                     import: []
                 },
                 files: {
-                    'assets/stylesheets/main.css': ['src/stylus/**/*.styl']
+                    'assets/stylesheets/app/main.css': ['src/stylus/**/*.styl']
                 }
             },
             prod: {
@@ -57,14 +57,14 @@ module.exports = function(grunt) {
         requirejs: {
             compile: {
                 options: {
-                    baseUrl: "assets/javascripts",
+                    baseUrl: "assets/javascripts/app",
                     name: "main",
                     out: "assets/dist/main.js"
                 }
             }
         },
         compress: {
-            main: {
+            prod: {
                 options: {
                     mode: 'gzip'
                 },
@@ -75,20 +75,18 @@ module.exports = function(grunt) {
             }
         },
         copy: {
-            dev: {
-                cwd: 'src/vendors/',
-                src: ['**'],
-                dest: 'assets/javascripts/vendors/',
-                flatten: true,
-                expand: true
-            },
             prod: {
-                cwd: 'src/vendors/',
+                cwd: 'assets/javascripts/vendors/',
                 src: ['**'],
                 dest: 'assets/dist/vendors/',
                 flatten: true,
                 expand: true
             }
+        },
+        clean: {
+            app: ["assets/javascripts/app", "assets/stylesheets/app"],
+            compress: ["assets/dist/**/*.js"],
+            dist: ["assets/dist"]
         }
     });
 
@@ -98,9 +96,11 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-requirejs');
     grunt.loadNpmTasks('grunt-contrib-compress');
     grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-clean');
 
     // Here we  go !
-    grunt.registerTask('default', ['typescript', 'copy:dev', 'stylus:dev']);
-    grunt.registerTask('dev', ['typescript', 'stylus:dev', 'copy:dev', 'watch']);
-    grunt.registerTask('prod', ['typescript', 'stylus:prod', 'requirejs', 'copy:prod', 'compress']);
+    grunt.registerTask('default', ['clean:app', 'typescript', 'stylus:dev']);
+    grunt.registerTask('dev', ['clean:app', 'typescript', 'stylus:dev', 'watch']);
+    grunt.registerTask('prod', ['clean:dist', 'typescript', 'stylus:prod', 'requirejs', 'copy:prod', 'compress:prod']);
+    grunt.registerTask('cleanAll', ['clean:app', 'clean:dist']);
 };

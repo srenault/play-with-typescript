@@ -2,29 +2,52 @@
 <html lang="en" >
   <head>
     <!-- DEV -->
-    <link rel="stylesheet" href="/assets/stylesheets/main.css">
-    <script src="/assets/javascripts/vendors/jquery.js"></script>
-    <script src="/assets/javascripts/vendors/native.history.js"></script>
-    <script src="/assets/javascripts/vendors/Router.js"></script>
-    <script data-main="/assets/javascripts/main.js" src="/assets/javascripts/vendors/require.js"></script>
+    <!-- <link rel="stylesheet" href="assets/stylesheets/app/main.css"> -->
+    <!-- <script src="assets/javascripts/vendors/jquery.js"></script> -->
+    <!-- <script data-main="assets/javascripts/app/main.js" src="assets/javascripts/vendors/require.js"></script> -->
 
     <!-- PROD -->
-    <!-- <link rel="stylesheet" href="/assets/dist/main.css"> -->
-    <!-- <script src="/assets/dist/vendors/jquery.js"></script> -->
-    <!-- <script src="/assets/dist/vendors/native.history.js"></script> -->
-    <!-- <script src="/assets/dist/vendors/Router.js"></script> -->
-    <!-- <script data-main="/assets/dist/main.js" src="/assets/javascripts/vendors/require.js" type="text/javascript"></script> -->
+    <link rel="stylesheet" href="assets/dist/main.css">
+    <script src="assets/dist/vendors/jquery.js"></script>
+    <script data-main="assets/dist/main.js" src="assets/javascripts/vendors/require.js" type="text/javascript"></script>
   </head>
   <body>
-    <a href="#/bar">Bar</a>
+    <h1>Typescript sample project</h1>
+    This project doesn't require any server.
+    <h3>How to build it ?</h3>
+    <ul class="setting-up">
+      <li>Install <a href="http://npmjs.org">npm</a></li>
+      <li>
+        Install <a href="http://gruntjs.com/">grunt</a>
+        <pre><code>npm install grunt</code></pre>
+      </li>
+      <li>
+        At the root directory, type:
+        <pre><code>npm install</code></pre>
+        This will install needed grunt plugins.
+      </li>
+      <li>
+        Finally build the project:
+        <pre><code>grunt</code></pre>
+      </li>
+    </ul>
     <br/>
+    The provided Gruntfile.js define 4 tasks:
+    <ul class="tasks">
+      <li>The <span class="task">default</span> task: compile Typescript to Javascript & Stylus to CSS.</li>
+      <li>The <span class="task">dev</span> task: like the default task but automatically compile when changements occures on Typescript & Stylus files.</li>
+      <li>The <span class="task">prod</span> task: concat, minify and compress Typescript & Stylus files.</li>
+      <li>The <span class="task">cleanAll</span> task: delete the genereted Javascript & CSS files.</li>
+    </ul>
+
+    <!-- requirejs configuration -->
     <script type="text/javascript">
-        require.config({
-            baseUrl: 'assets/javascripts',
-            paths: {
-                jquery: '/assets/javascripts/vendors/jquery'
-            }
-        });
+      require.config({
+          baseUrl: 'assets/javascripts/app',
+          paths: {
+              jquery: '/assets/javascripts/vendors/jquery'
+          }
+      });
     </script>
   </body>
 </html>
