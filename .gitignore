@@ -1,9 +1,13 @@
 .DS_Store
 no-server/node_modules/
-no-server/assets/
+no-server/assets/javascripts/app
+no-server/assets/stylesheets/app
+no-server/assets/dist
 with-play/project/project/
 with-play/project/target/
 with-play/target/
 with-play/node_modules/
-with-play/public/
+with-play/public/javascripts/app
+with-play/public/stylesheets/app
+with-play/public/dist
 with-play/logs/application.log
