@@ -1,24 +1,26 @@
 ///<reference path="./browser.d.ts"/>
 
-import nsbar = require("./models/Bar");
-import nsfoo = require("./models/Foo");
-import models = require("./models/*");
-import nscollections = require("./ts/collections");
-import App = require("./app");
-import Any = require("./models/Any"); // Direct import !
-
-var Bar = models.Bar;
-var Foo = models.Foo;
-var List = nscollections.collections.immutable.List;
+import Immutable = require("ts/immutable/package");
+var Option = Immutable.Option;
+var List = Immutable.List;
 
 require([], () => {
     $(document).ready(() => {
-        var bar = new Bar()
-        var barList = List<nsbar.Bar>(bar, bar, bar, bar);
+        List(1,2,3,4).map((i) => {
+            return i * 2;
+        }).foreach((i) => {
+            console.log(i);
+        });
 
-        var foo = new Foo();
-        var fooList = List<nsfoo.Foo>(foo, foo, foo, foo);
+        var age = Option(null).getOrElse(() => {
+            return 18;
+        });
 
-        var app = new App(Router);
+        var maybeWeight = Option(70);
+        maybeWeight.map((w) => {
+            return w / 2
+        });
+
+        console.log(age);
     });
 });

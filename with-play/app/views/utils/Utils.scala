@@ -22,4 +22,10 @@ object `package` {
     } else {
       Html(s"""<link rel="stylesheet" media="screen" href="${devUrl.absoluteURL()}">""" )
     }
+
+  def versioned(path: String) =
+    "/..." + global.App.version + "/" + path
+
+  def nonVersioned(path: String) =
+    "/xxxxxx/" + path
 }

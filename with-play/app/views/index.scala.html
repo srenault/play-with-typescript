@@ -2,19 +2,60 @@
 
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Sample App</title>
-        <link rel="shortcut icon" type="image/png" href="@utils.staticAsset("images/favicon.png")">
-        @utils.linkTag(utils.Asset("stylesheets/app/main.css"), utils.Asset("dist/main.css"))
-        @utils.scriptTag(utils.staticAsset("javascripts/vendors/jquery.js"), utils.staticAsset("dist/vendors/jquery.js"))
-        @utils.scriptTag(utils.staticAsset("javascripts/vendors/native.history.js"), utils.staticAsset("dist/vendors/native.history.js"))
-        @utils.scriptTag(utils.staticAsset("javascripts/vendors/Router.js"), utils.staticAsset("dist/vendors/Router.js"))
-        @if(global.App.isProd) {
-        <script data-main="@utils.Asset("dist/app/main.js")" src="@utils.staticAsset("dist/vendors/require.js")"></script>
-        } else {
-        <script data-main="@utils.Asset("javascripts/app/main.js")" src="@utils.staticAsset("javascripts/vendors/require.js")"></script>
-        }
-    </head>
-    <body>
-    </body>
+  <head>
+    <title>Sample App</title>
+    <link rel="shortcut icon" type="image/png" href="@utils.staticAsset("images/favicon.png")">
+    @utils.linkTag(utils.Asset("stylesheets/app/main.css"), utils.Asset("dist/main.css"))
+    @utils.scriptTag(utils.staticAsset("javascripts/vendors/jquery.js"), utils.staticAsset("dist/vendors/jquery.js"))
+    @if(global.App.isProd) {
+    <script data-main="@utils.Asset("dist/app/main.js")" src="@utils.staticAsset("dist/vendors/require.js")"></script>
+    } else {
+    <script data-main="@utils.Asset("javascripts/app/main.js")" src="@utils.staticAsset("javascripts/vendors/require.js")"></script>
+    }
+  </head>
+  <body>
+    <h1>Typescript sample project</h1>
+    This project require Play framework server (2.1.3).
+    <h3>Organisation</h3>
+    The front base code is located in the "front" directory.
+    <br/>
+    This directory contains Typescript and Stylus code.
+    <br/>
+    The compiled files are generated to the public directory of play project.
+    <h3>How to build it ?</h3>
+    <ul class="setting-up">
+      <li>Install <a href="http://npmjs.org">npm</a></li>
+      <li>
+        Install <a href="http://gruntjs.com/">grunt</a>
+        <pre><code>npm install grunt</code></pre>
+      </li>
+      <li>
+        At the root directory, type:
+        <pre><code>npm install</code></pre>
+        This will install needed grunt plugins.
+      </li>
+      <li>
+        Finally build the project:
+        <pre><code>grunt</code></pre>
+      </li>
+    </ul>
+    <br/>
+    The provided Gruntfile.js define 4 tasks:
+    <ul class="tasks">
+      <li>The <span class="task">default</span> task: compile Typescript to Javascript & Stylus to CSS.</li>
+      <li>The <span class="task">dev</span> task: like the default task but automatically compile when changements occures on Typescript & Stylus files.</li>
+      <li>The <span class="task">prod</span> task: concat, minify and compress Typescript & Stylus files.</li>
+      <li>The <span class="task">cleanAll</span> task: delete the genereted Javascript & CSS files.</li>
+    </ul>
+
+    <!-- requirejs configuration -->
+    <script type="text/javascript">
+      require.config({
+      baseUrl: '@utils.versioned("javascripts/app")',
+      paths: {
+        jquery: '@utils.nonVersioned("javascripts/vendors/jquery")'
+      }
+      });
+    </script>
+  </body>
 </html>
