@@ -87,7 +87,7 @@ module.exports = function(grunt) {
         },
         clean: {
             app: ["public/javascripts/app", "public/stylesheets/app"],
-            compress: ["public/dist/**/*.js"],
+            compress: ["public/dist/**/*.js", "public/dist/**/*.css"],
             dist: ["public/dist"]
         }
     });
